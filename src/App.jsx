@@ -1,10 +1,40 @@
 import './styles/App.css'
+import {useState} from 'react'
 
 function App() {
+  // General Info State
+  const [userName, setUserName] = useState('John');
+  const [tel, setTel] = useState('09250788447');
+  const [email, setEmail] = useState('johnsmith@gmail.com');
+  const [isEditingGeneral, setIsEditingGeneral] = useState(false);  
+
+  //Education State
+  const [schoolName, setSchoolName] = useState('ABC University');
+  const [degree, setDegree] = useState('Bachelor of Science in Computer Science');
+  const [yearsAttended, setYearsAttended] = useState('2015 - 2019');
+  const [isEditingEducation, setIsEditingEducation] = useState(false);
+
+  //Experience State
+  const [position, setPosition] = useState('Software Engineer at XYZ Corp');
+  const [responsibilities, setResponsibilities] = useState('Developed web applications using React and Node.js');
+  const [yearsWorked, setYearsWorked] = useState('2019 - Present');
+  const [isEditingExperience, setIsEditingExperience] = useState(false);
+
   return (
     <div className="App">
       <h1>CV Application</h1>
-      <section className="General-Info displayMode">
+      {isEditingGeneral ? 
+      <section className="General-Info editMode">
+        <h2>Personal Details</h2>
+        <input type="text" placeholder="John" value={userName} onChange={(e)=>setUserName(e.target.value)}/>
+        <input type="text" placeholder="09******" value={tel} onChange={(e)=>setTel(e.target.value)}/>
+        <input type="email" placeholder="example@gmail.com" value={email} onChange={(e)=>setEmail(e.target.value)}></input>
+        <div className="action-buttons">
+          <button className="save-button" onClick={() => setIsEditingGeneral(false)}>Save</button>
+          <button className="cancel-button" onClick={() => setIsEditingGeneral(false)}>Cancel</button>
+        </div>   
+      </section>:
+       <section className="General-Info displayMode">
         <h2>Personal Details</h2>
         <div className="Info-Container">
            <div className="Label-Name">
@@ -13,51 +43,55 @@ function App() {
               <p>Email&#9;:</p>
           </div>
           <div className="Info-Details">
-            <p>John Smith</p>
-            <p>09250788447</p>
-            <p>johnsmith@gmail.com</p>
+            <p>{userName}</p>
+            <p>{tel}</p>
+            <p>{email}</p>
           </div>
         </div>
-        <button className="edit-button">Edit</button>
-      </section>
-      <section className="General-Info editMode">
-        <h2>Personal Details</h2>
-        <input type="text" placeholder="John" defaultValue="John"/>
-        <input type="text" placeholder="09******" defaultValue="09250788447"/>
-        <input type="email" placeholder="example@gmail.com" defaultValue="johnsmith@gmail.com"></input>
-        <div className="action-buttons">
-          <button className="save-button">Save</button>
-          <button className="cancel-button">Cancel</button>
-        </div>   
-      </section>
+        <button className="edit-button" onClick={() => setIsEditingGeneral(true)}>Edit</button>
+      </section> 
+      }
 
-      <section className="Education displayMode">
-        <h2>Education Background</h2>
-        <div className="Info-Container">
-          <div className="Label-Name">
-            <p>University:</p>
-            <p>Degree:</p>
-            <p>Years Attended:</p>
-          </div>
-          <div className="Info-Details">
-            <p>ABC University</p>
-            <p>Bachelor of Science in Computer Science</p>
-            <p>2015 - 2019</p>
+      {isEditingEducation ?
+        <section className="Education editMode">
+          <h2>Education Background</h2>
+          <input type="text" placeholder="School Name" value={schoolName} onChange={(e) => setSchoolName(e.target.value)}/>
+          <input type="text" placeholder="Degree" value={degree} onChange={(e) => setDegree(e.target.value)}/>
+          <input type="text" placeholder="Years Attended" value={yearsAttended} onChange={(e)=>setYearsAttended(e.target.value)}/>
+          <div className="action-buttons">
+            <button className="save-button" onClick={() => setIsEditingEducation(false)}>Save</button>
+            <button className="cancel-button" onClick={() => setIsEditingEducation(false)}>Cancel</button>
+          </div> 
+        </section>:
+        <section className="Education displayMode">
+          <h2>Education Background</h2>
+          <div className="Info-Container">
+            <div className="Label-Name">
+              <p>University:</p>
+              <p>Degree:</p>
+              <p>Years Attended:</p>
+            </div>
+            <div className="Info-Details">
+              <p>{schoolName}</p>
+              <p>{degree}</p>
+              <p>{yearsAttended}</p>
+            </div>    
+          </div>   
+          <button className="edit-button" onClick={() => setIsEditingEducation(true)}>Edit</button>
+        </section>
+      }
+
+      {isEditingExperience ?
+        <section className="Experience editMode">
+          <h2>Practical Experience</h2>
+          <input type="text" placeholder="Position" value={position} onChange={(e)=>setPosition(e.target.value)}/>
+          <input type="text" placeholder="Responsibilities" value={responsibilities} onChange={(e)=>setResponsibilities(e.target.value)}/>
+          <input type="text" placeholder="Years Worked" value={yearsWorked} onChange={(e)=> setYearsWorked(e.target.value)}/>
+          <div className="action-buttons">
+            <button className="save-button" onClick={()=> setIsEditingExperience(false)}>Save</button>
+            <button className="cancel-button" onClick={() => setIsEditingExperience(false)}>Cancel</button>
           </div>    
-        </div>   
-        <button className="edit-button">Edit</button>
-      </section>
-      <section className="Education editMode">
-        <h2>Education Background</h2>
-        <input type="text" placeholder="School Name" defaultValue="ABC University"/>
-        <input type="text" placeholder="Degree" defaultValue="Bachelor of Science in Computer Science"/>
-        <input type="text" placeholder="Years Attended" defaultValue="2015 - 2019"/>
-        <div className="action-buttons">
-          <button className="save-button">Save</button>
-          <button className="cancel-button">Cancel</button>
-        </div> 
-      </section>
-      
+      </section>:
       <section className="Experience displayMode">
         <h2>Practical Experience</h2>
         <div className="Info-Container">
@@ -67,25 +101,14 @@ function App() {
             <p>Years Worked:</p>
           </div>
           <div className="Info-Details">
-            <p>Software Engineer at XYZ Corp</p>
-            <p>Developed web applications using React and Node.js</p>
-            <p>2019 - Present</p>
+            <p>{position}</p>
+            <p>{responsibilities}</p>
+            <p>{yearsWorked}</p>
           </div>
         </div>
-        <button className="edit-button">Edit</button>
+        <button className="edit-button" onClick={()=> setIsEditingExperience(true)}>Edit</button>
       </section>
-
-      <section className="Experience editMode">
-        <h2>Practical Experience</h2>
-        <input type="text" placeholder="Position" defaultValue="Software Engineer at XYZ Corp"/>
-        <input type="text" placeholder="Responsibilities" defaultValue="Developed web applications using React and Node.js"/>
-        <input type="text" placeholder="Years Worked" defaultValue="2019 - Present"/>
-        <div className="action-buttons">
-          <button className="save-button">Save</button>
-          <button className="cancel-button">Cancel</button>
-        </div> 
-        
-      </section>
+      }      
     </div>
   )
 }
