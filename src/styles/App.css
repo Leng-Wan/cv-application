@@ -1,0 +1,81 @@
+*
+{
+  margin:0;
+  padding:0;
+  box-sizing:border-box;
+}
+body {
+  font-family: Arial, sans-serif;
+  line-height: 1.6;
+  max-width: 800px;
+  width:100%;
+  margin: 20px auto;
+  padding: 0 20px;
+}
+.App
+{
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  border: 10px solid #ccc;
+  padding: 15px;
+  border-radius: 5px;
+}
+
+h1
+{
+  text-align: center;
+  margin-bottom: 20px;
+}
+.General-Info, .Education, .Experience
+{
+  margin-left:10px;
+  margin-bottom:20px;
+  display:flex;
+  flex-direction:column;
+  gap:8px;
+  border:2px solid #ddd;
+  padding:10px 20px;
+  border-radius:5px;
+}
+
+.Info-Container
+{
+  display:flex;
+  flex-direction:row;
+  gap:15px;
+}
+input
+{
+  padding:5px;
+  font-size:16px;
+  border:1px solid #ccc;
+  border-radius:3px;
+}
+
+.editMode
+{
+  width:80%;
+  margin:auto;
+}
+
+.action-buttons
+{
+  display:flex;
+  flex-direction:row;
+  gap:10px;
+  margin-top:10px;
+  align-items:center;
+  justify-content:center;
+}
+button
+{
+  padding:8px 12px;
+  font-size:16px;
+  border:none;
+  border-radius:4px;
+  cursor:pointer;
+  background-color:#4CAF50;
+  color:white;
+  width:15%;
+}
